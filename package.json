@@ -1,0 +1,21 @@
+{
+  "name": "portafolio-backend",
+  "version": "1.0.0",
+  "description": "Portafolio Backend to receive email from the Portafolio Website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Nicolas Fernandez",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.6.0",
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2",
+    "express-validator": "^6.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
