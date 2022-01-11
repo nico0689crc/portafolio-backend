@@ -58,7 +58,7 @@ app.post(
         from: globalConfig.sendgrid_email_from,
         subject: `Portafolio's Message from ${name}`,
         text: "Text",
-        html: `<p>${message}</p>`,
+        html: `<h2>From: ${name} - Email: ${email}</h2><h3>Mesagge</h3><p>${message}</p>`,
       };
 
       await sendgridEmail.send(sendGridMessage);
