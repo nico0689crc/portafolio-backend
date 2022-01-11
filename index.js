@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const { body, validationResult } = require("express-validator");
 const sendgridEmail = require("@sendgrid/mail");
 const globalConfig = require("./utils/config");
@@ -8,8 +9,9 @@ const globalErrorHandler = require("./middlewares/globalErrorHandler");
 const app = express();
 
 app.use(express.json());
-sendgridEmail.setApiKey(globalConfig.sendgrid_api_key);
+app.use(cors());
 
+sendgridEmail.setApiKey(globalConfig.sendgrid_api_key);
 app.post(
   "/",
   [
@@ -20,12 +22,12 @@ app.post(
         return "Email format is required.";
       }),
     body("name")
-      .isLength({ min: 8 })
+      .isLength({ min: 1 })
       .withMessage(() => {
         return "Name is required.";
       }),
     body("message")
-      .isLength({ min: 20 })
+      .isLength({ min: 1 })
       .trim()
       .escape()
       .withMessage(() => {
@@ -60,8 +62,7 @@ app.post(
       };
 
       await sendgridEmail.send(sendGridMessage);
-
-      res.status(200).send({ email, name, message });
+      res.status(204).send();
     } catch (error) {
       return next(new Error(error.message));
     }
