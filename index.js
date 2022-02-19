@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const cors = require("cors");
 const { body, validationResult } = require("express-validator");
 const sendgridEmail = require("@sendgrid/mail");
@@ -10,6 +11,8 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
 sendgridEmail.setApiKey(globalConfig.sendgrid_api_key);
 app.post(
